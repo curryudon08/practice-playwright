@@ -3,9 +3,9 @@ import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
-  readonly emailInput: Locator;
-  readonly passwordInput: Locator;
-  readonly loginButton: Locator;
+  private readonly emailInput: Locator;
+  private readonly passwordInput: Locator;
+  private readonly loginButton: Locator;
   readonly emailMessage: Locator
   readonly passwordMessage: Locator;
 

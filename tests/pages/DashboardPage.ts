@@ -3,8 +3,8 @@ import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class DashboardPage extends BasePage {
-  readonly logoutButton: Locator;
-  readonly reservationLink: Locator;
+  private readonly logoutButton: Locator;
+  private readonly reservationLink: Locator;
   readonly rank: Locator
 
   constructor(page: Page) {
