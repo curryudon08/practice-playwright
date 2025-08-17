@@ -1,12 +1,12 @@
 // pages/DashboardPage.ts
 import { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class DashboardPage {
-  readonly page: Page;
+export class DashboardPage extends BasePage {
   readonly logoutButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.logoutButton = page.getByRole('button', { name: 'ログアウト' });
   }
 

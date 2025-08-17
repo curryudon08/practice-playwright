@@ -1,12 +1,12 @@
 // pages/HomePage.ts
 import { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class HomePage {
-  readonly page: Page;
+export class HomePage extends BasePage {
   readonly loginButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.loginButton = page.getByRole('button', { name: 'ログイン' });
   }
 

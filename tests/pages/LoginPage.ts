@@ -1,14 +1,14 @@
 // pages/LoginPage.ts
 import { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class LoginPage {
-  readonly page: Page;
+export class LoginPage extends BasePage {
   readonly emailInput: Locator;
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.emailInput = page.getByRole('textbox', { name: 'メールアドレス' });
     this.passwordInput = page.getByRole('textbox', { name: 'パスワード' });
     this.loginButton = page.locator('#login-button');
