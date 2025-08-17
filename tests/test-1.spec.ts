@@ -17,6 +17,8 @@ test('TC001', async ({ page }) => {
   await homePage.goto();
   await homePage.clickLogin();
   await loginPage.login('jun@example.com', 'pa55w0rd!');
+  // マイページが表示される
+  await expect(page.locator('#rank')).toContainText('プレミアム会員');
   // ログアウトする
   await dashboardPage.logout();
 });
@@ -34,6 +36,8 @@ test('TC002', async ({ page }) => {
   await homePage.goto();
   await homePage.clickLogin();
   await loginPage.login('sakura@example.com', 'pass1234');
+  // マイページが表示される
+  await expect(page.locator('#rank')).toContainText('一般会員');
   // ログアウトする
   await dashboardPage.logout();
 });
