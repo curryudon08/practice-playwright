@@ -18,7 +18,7 @@ test('TC001', async ({ page }) => {
   await homePage.clickLogin();
   await loginPage.login('jun@example.com', 'pa55w0rd!');
   // マイページが表示される
-  await expect(page.locator('#rank')).toContainText('プレミアム会員');
+  await expect(dashboardPage.rank).toContainText('プレミアム会員');
   // ログアウトする
   await dashboardPage.logout();
 });
@@ -37,7 +37,7 @@ test('TC002', async ({ page }) => {
   await homePage.clickLogin();
   await loginPage.login('sakura@example.com', 'pass1234');
   // マイページが表示される
-  await expect(page.locator('#rank')).toContainText('一般会員');
+  await expect(dashboardPage.rank).toContainText('一般会員');
   // ログアウトする
   await dashboardPage.logout();
 });
@@ -56,10 +56,10 @@ test('TC003', async ({ page }) => {
   await homePage.clickLogin();
   await loginPage.login('xxxxx@example.com', 'xxxxx');
   // エラーメッセージを確認する
-  await expect(page.locator('#email-message')).toBeVisible();
-  await expect(page.locator('#email-message')).toContainText('メールアドレスまたはパスワードが違います。');
-  await expect(page.locator('#password-message')).toBeVisible();
-  await expect(page.locator('#password-message')).toContainText('メールアドレスまたはパスワードが違います。');
+  await expect(loginPage.emailMessage).toBeVisible();
+  await expect(loginPage.emailMessage).toContainText('メールアドレスまたはパスワードが違います。');
+  await expect(loginPage.passwordMessage).toBeVisible();
+  await expect(loginPage.passwordMessage).toContainText('メールアドレスまたはパスワードが違います。');
 });
 
 /**
@@ -76,8 +76,8 @@ test('TC004', async ({ page }) => {
   await homePage.clickLogin();
   await loginPage.login('', '');
   // エラーメッセージを確認する
-  await expect(page.locator('#email-message')).toBeVisible();
-  await expect(page.locator('#email-message')).toContainText('このフィールドを入力してください。');
-  await expect(page.locator('#password-message')).toBeVisible();
-  await expect(page.locator('#password-message')).toContainText('このフィールドを入力してください。');
+  await expect(loginPage.emailMessage).toBeVisible();
+  await expect(loginPage.emailMessage).toContainText('このフィールドを入力してください。');
+  await expect(loginPage.passwordMessage).toBeVisible();
+  await expect(loginPage.passwordMessage).toContainText('このフィールドを入力してください。');
 });
