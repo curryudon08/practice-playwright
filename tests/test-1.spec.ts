@@ -14,10 +14,10 @@ test('TC001', async ({ page }) => {
   const indexPage = await IndexPage.initialize(page);
   // ログイン画面に遷移する
   await indexPage.clickLoginLink();
-  const loginPage = new LoginPage(page);
-  const myPage = new MyPage(page);
+  const loginPage = await LoginPage.initialize(page);
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await loginPage.login('jun@example.com', 'pa55w0rd!');
+  const myPage = new MyPage(page);
   // マイページが表示される
   await expect(myPage.rank).toContainText('プレミアム会員');
   // ログアウトする
@@ -34,10 +34,10 @@ test('TC002', async ({ page }) => {
   const indexPage = await IndexPage.initialize(page);
   // ログイン画面に遷移する
   await indexPage.clickLoginLink();
-  const loginPage = new LoginPage(page);
-  const myPage = new MyPage(page);
+  const loginPage = await LoginPage.initialize(page);
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await loginPage.login('sakura@example.com', 'pass1234');
+  const myPage = new MyPage(page);
   // マイページが表示される
   await expect(myPage.rank).toContainText('一般会員');
   // ログアウトする
@@ -49,12 +49,12 @@ test('TC002', async ({ page }) => {
  * 誤った認証情報
  */
 test('TC003', async ({ page }) => {
-  // ホーム画面に遷移する
+ // ホーム画面に遷移する
   await page.goto('https://hotel-example-site.takeyaqa.dev/ja/index.html');
   const indexPage = await IndexPage.initialize(page);
   // ログイン画面に遷移する
   await indexPage.clickLoginLink();
-  const loginPage = new LoginPage(page);
+  const loginPage = await LoginPage.initialize(page);
   // 誤った認証情報でログインボタンをクリックする
   await loginPage.login('xxxxx@example.com', 'xxxxx');
   // エラーメッセージを確認する
@@ -69,12 +69,12 @@ test('TC003', async ({ page }) => {
  * 認証情報が未入力
  */
 test('TC004', async ({ page }) => {
-  // ホーム画面に遷移する
+ // ホーム画面に遷移する
   await page.goto('https://hotel-example-site.takeyaqa.dev/ja/index.html');
   const indexPage = await IndexPage.initialize(page);
   // ログイン画面に遷移する
   await indexPage.clickLoginLink();
-  const loginPage = new LoginPage(page);
+  const loginPage = await LoginPage.initialize(page);
   // 認証情報を未入力でログインボタンをクリックする
   await loginPage.login('', '');
   // エラーメッセージを確認する

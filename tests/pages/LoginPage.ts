@@ -1,5 +1,5 @@
 // pages/LoginPage.ts
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
@@ -7,17 +7,21 @@ export class LoginPage extends BasePage {
   private readonly passwordInput: Locator;
   private readonly loginButton: Locator;
 
-  constructor(page: Page) {
+  public static async initialize(page: Page): Promise<LoginPage> {
+      const loginPage = new LoginPage(page);
+      await expect(page).toHaveURL(/login.html/);
+      return loginPage;
+  }
+
+  private constructor(page: Page) {
     super(page);
-    this.emailInput = page.getByRole('textbox', { name: 'メールアドレス' });
-    this.passwordInput = page.getByRole('textbox', { name: 'パスワード' });
+    this.emailInput = page.locator('#email');
+    this.passwordInput = page.locator('#password');
     this.loginButton = page.locator('#login-button');
   }
 
-  async login(email: string, password: string) {
-    await this.emailInput.click();
+  public async login(email: string, password: string) {
     await this.emailInput.fill(email);
-    await this.passwordInput.click();
     await this.passwordInput.fill(password);
     await this.loginButton.click();
   }
