@@ -1,20 +1,21 @@
 // pages/IndexPage.ts
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class IndexPage extends BasePage {
-  private readonly loginButton: Locator;
 
-  constructor(page: Page) {
+  public static async initialize(page: Page): Promise<IndexPage> {
+      const indexPage = new IndexPage(page);
+      await expect(page).toHaveURL(/index.html/);
+      return indexPage;
+  }
+
+  private constructor(page: Page) {
     super(page);
-    this.loginButton = page.getByRole('button', { name: 'ログイン' });
   }
 
-  async goto() {
-    await this.page.goto('https://hotel-example-site.takeyaqa.dev/ja/index.html');
-  }
-
-  async clickLogin() {
-    await this.loginButton.click();
+  public async clickLoginLink(){
+    const loginLink = this.page.getByRole('button', { name: 'ログイン' });
+    await loginLink.click();
   }
 }
