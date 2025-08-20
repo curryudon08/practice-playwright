@@ -33,12 +33,4 @@ export class LoginPage extends BasePage {
   public async getPasswordMessageLabel():Promise<Locator>{
     return this.page.locator('#password-message');
   }
-
-  public async getEmailMessageLabel():Promise<Locator>{
-    return this.page.locator('#email-message');
-  }
-
-  public async getPasswordMessageLabel():Promise<Locator>{
-    return this.page.locator('#password-message');
-  }
 }
