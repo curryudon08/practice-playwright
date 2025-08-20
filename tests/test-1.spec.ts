@@ -17,11 +17,11 @@ test('TC001', async ({ page }) => {
   const loginPage = await LoginPage.initialize(page);
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await loginPage.login('jun@example.com', 'pa55w0rd!');
-  const myPage = new MyPage(page);
+  const myPage = await MyPage.initialize(page);
   // マイページが表示される
-  await expect(myPage.rank).toContainText('プレミアム会員');
-  // ログアウトする
-  await myPage.logout();
+  await expect(await myPage.getEmailLabel()).toContainText('jun@example.com');
+  await expect(await myPage.getUserNameLabel()).toContainText('林潤');
+  await expect(await myPage.getRankLabel()).toContainText('プレミアム会員');
 });
 
 /**
@@ -37,11 +37,11 @@ test('TC002', async ({ page }) => {
   const loginPage = await LoginPage.initialize(page);
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await loginPage.login('sakura@example.com', 'pass1234');
-  const myPage = new MyPage(page);
+  const myPage = await MyPage.initialize(page);
   // マイページが表示される
-  await expect(myPage.rank).toContainText('一般会員');
-  // ログアウトする
-  await myPage.logout();
+  await expect(await myPage.getEmailLabel()).toContainText('sakura@example.com');
+  await expect(await myPage.getUserNameLabel()).toContainText('松本さくら');
+  await expect(await myPage.getRankLabel()).toContainText('一般会員');
 });
 
 /**
