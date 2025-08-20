@@ -1,6 +1,6 @@
 // test-1.spec.ts
 import { test, expect } from '@playwright/test';
-import { HomePage } from './pages/HomePage';
+import { IndexPage } from './pages/IndexPage';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 
@@ -9,13 +9,13 @@ import { DashboardPage } from './pages/DashboardPage';
  * プレミアム会員
  */
 test('TC001', async ({ page }) => {
-  const homePage = new HomePage(page);
+  const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
   const dashboardPage = new DashboardPage(page);
 
   // ログインID（メールアドレス）、パスワードを入力してログインする
-  await homePage.goto();
-  await homePage.clickLogin();
+  await indexPage.goto();
+  await indexPage.clickLogin();
   await loginPage.login('jun@example.com', 'pa55w0rd!');
   // マイページが表示される
   await expect(dashboardPage.rank).toContainText('プレミアム会員');
@@ -28,13 +28,13 @@ test('TC001', async ({ page }) => {
  * 一般会員
  */
 test('TC002', async ({ page }) => {
-  const homePage = new HomePage(page);
+  const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
   const dashboardPage = new DashboardPage(page);
 
   // ログインID（メールアドレス）、パスワードを入力してログインする
-  await homePage.goto();
-  await homePage.clickLogin();
+  await indexPage.goto();
+  await indexPage.clickLogin();
   await loginPage.login('sakura@example.com', 'pass1234');
   // マイページが表示される
   await expect(dashboardPage.rank).toContainText('一般会員');
@@ -47,13 +47,13 @@ test('TC002', async ({ page }) => {
  * 誤った認証情報
  */
 test('TC003', async ({ page }) => {
-  const homePage = new HomePage(page);
+  const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
   const dashboardPage = new DashboardPage(page);
 
   // 誤った認証情報でログインボタンをクリックする
-  await homePage.goto();
-  await homePage.clickLogin();
+  await indexPage.goto();
+  await indexPage.clickLogin();
   await loginPage.login('xxxxx@example.com', 'xxxxx');
   // エラーメッセージを確認する
   await expect(loginPage.emailMessage).toBeVisible();
@@ -67,13 +67,13 @@ test('TC003', async ({ page }) => {
  * 認証情報が未入力
  */
 test('TC004', async ({ page }) => {
-  const homePage = new HomePage(page);
+  const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
   const dashboardPage = new DashboardPage(page);
 
   // 認証情報を未入力でログインボタンをクリックする
-  await homePage.goto();
-  await homePage.clickLogin();
+  await indexPage.goto();
+  await indexPage.clickLogin();
   await loginPage.login('', '');
   // エラーメッセージを確認する
   await expect(loginPage.emailMessage).toBeVisible();

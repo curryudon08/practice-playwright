@@ -2,7 +2,7 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
-export class HomePage extends BasePage {
+export class IndexPage extends BasePage {
   private readonly loginButton: Locator;
 
   constructor(page: Page) {
