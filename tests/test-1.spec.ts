@@ -12,7 +12,6 @@ test('TC001', async ({ page }) => {
   const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
   const myPage = new MyPage(page);
-
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await indexPage.goto();
   await indexPage.clickLogin();
@@ -31,7 +30,6 @@ test('TC002', async ({ page }) => {
   const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
   const myPage = new MyPage(page);
-
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await indexPage.goto();
   await indexPage.clickLogin();
@@ -56,10 +54,10 @@ test('TC003', async ({ page }) => {
   await indexPage.clickLogin();
   await loginPage.login('xxxxx@example.com', 'xxxxx');
   // エラーメッセージを確認する
-  await expect(loginPage.emailMessage).toBeVisible();
-  await expect(loginPage.emailMessage).toContainText('メールアドレスまたはパスワードが違います。');
-  await expect(loginPage.passwordMessage).toBeVisible();
-  await expect(loginPage.passwordMessage).toContainText('メールアドレスまたはパスワードが違います。');
+  await expect(await loginPage.getEmailMessageLabel()).toBeVisible();
+  await expect(await loginPage.getEmailMessageLabel()).toContainText('メールアドレスまたはパスワードが違います。');
+  await expect(await loginPage.getPasswordMessageLabel()).toBeVisible();
+  await expect(await loginPage.getPasswordMessageLabel()).toContainText('メールアドレスまたはパスワードが違います。');
 });
 
 /**
@@ -76,8 +74,8 @@ test('TC004', async ({ page }) => {
   await indexPage.clickLogin();
   await loginPage.login('', '');
   // エラーメッセージを確認する
-  await expect(loginPage.emailMessage).toBeVisible();
-  await expect(loginPage.emailMessage).toContainText('このフィールドを入力してください。');
-  await expect(loginPage.passwordMessage).toBeVisible();
-  await expect(loginPage.passwordMessage).toContainText('このフィールドを入力してください。');
+  await expect(await loginPage.getEmailMessageLabel()).toBeVisible();
+  await expect(await loginPage.getEmailMessageLabel()).toContainText('このフィールドを入力してください。');
+  await expect(await loginPage.getPasswordMessageLabel()).toBeVisible();
+  await expect(await loginPage.getPasswordMessageLabel()).toContainText('このフィールドを入力してください。');
 });

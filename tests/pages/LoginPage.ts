@@ -6,16 +6,12 @@ export class LoginPage extends BasePage {
   private readonly emailInput: Locator;
   private readonly passwordInput: Locator;
   private readonly loginButton: Locator;
-  readonly emailMessage: Locator
-  readonly passwordMessage: Locator;
 
   constructor(page: Page) {
     super(page);
     this.emailInput = page.getByRole('textbox', { name: 'メールアドレス' });
     this.passwordInput = page.getByRole('textbox', { name: 'パスワード' });
     this.loginButton = page.locator('#login-button');
-    this.emailMessage = page.locator('#email-message');
-    this.passwordMessage = page.locator('#password-message');
   }
 
   async login(email: string, password: string) {
@@ -24,5 +20,13 @@ export class LoginPage extends BasePage {
     await this.passwordInput.click();
     await this.passwordInput.fill(password);
     await this.loginButton.click();
+  }
+
+  public async getEmailMessageLabel():Promise<Locator>{
+    return this.page.locator('#email-message');
+  }
+
+  public async getPasswordMessageLabel():Promise<Locator>{
+    return this.page.locator('#password-message');
   }
 }
