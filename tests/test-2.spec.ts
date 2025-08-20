@@ -1,8 +1,8 @@
 // test-2.spec.ts
 import { test, expect } from '@playwright/test';
-import { HomePage } from './pages/HomePage';
+import { IndexPage } from './pages/IndexPage';
 import { LoginPage } from './pages/LoginPage';
-import { DashboardPage } from './pages/DashboardPage';
+import { MyPage } from './pages/MyPage.ts';
 import { ReservationPage } from './pages/ReservationPage';
 import { ReservationFormPage } from './pages/ReservationFormPage';
 import { ReservationConfirmPage } from './pages/ReservationConfirmPage.ts';
@@ -12,19 +12,20 @@ import { ReservationConfirmPage } from './pages/ReservationConfirmPage.ts';
  * プレミアム会員
  */
 test('TC005', async ({ page }) => {
-  const homePage = new HomePage(page);
-  const loginPage = new LoginPage(page);
-  const dashboardPage = new DashboardPage(page);
-  const reservationPage = new ReservationPage(page);
-
+  // ホーム画面に遷移する
+  await page.goto('https://hotel-example-site.takeyaqa.dev/ja/index.html');
+  const indexPage = await IndexPage.initialize(page);
+  // ログイン画面に遷移する
+  await indexPage.clickLoginLink();
+  const loginPage = await LoginPage.initialize(page);
   // ログインID（メールアドレス）、パスワードを入力してログインする
-  await homePage.goto();
-  await homePage.clickLogin();
   await loginPage.login('jun@example.com', 'pa55w0rd!');
+  const myPage = await MyPage.initialize(page);
   // マイページが表示される
-  await expect(dashboardPage.rank).toContainText('プレミアム会員');
+  await expect(await myPage.getRankLabel()).toContainText('プレミアム会員');
   // 宿泊予約ページに移動してプランを選択する
-  await dashboardPage.clickReservation();
+  await myPage.clickReservation();
+  const reservationPage = new ReservationPage(page);
   const booking = await reservationPage.selectPremiumPlan();
   // 予約フォームで予約する
   const reservationFormPage = new ReservationFormPage(booking);
@@ -36,5 +37,5 @@ test('TC005', async ({ page }) => {
   await expect(reservationConfirmPage.completionMessage).toContainText('ご来館、心よりお待ちしております。');
   await reservationConfirmPage.closeModal();
   // ログアウトする
-  await dashboardPage.logout();
+  await myPage.logout();
 });
