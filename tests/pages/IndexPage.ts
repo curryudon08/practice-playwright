@@ -1,4 +1,4 @@
-// pages/HomePage.ts
+// pages/IndexPage.ts
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 

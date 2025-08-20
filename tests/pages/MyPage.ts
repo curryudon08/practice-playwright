@@ -1,8 +1,8 @@
-// pages/DashboardPage.ts
+// pages/MyPage.ts
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
-export class DashboardPage extends BasePage {
+export class MyPage extends BasePage {
   private readonly logoutButton: Locator;
   private readonly reservationLink: Locator;
   readonly rank: Locator

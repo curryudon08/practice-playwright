@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 import { IndexPage } from './pages/IndexPage';
 import { LoginPage } from './pages/LoginPage';
-import { DashboardPage } from './pages/DashboardPage';
+import { MyPage } from './pages/MyPage';
 
 /**
  * ログイン認証成功
@@ -11,16 +11,16 @@ import { DashboardPage } from './pages/DashboardPage';
 test('TC001', async ({ page }) => {
   const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
-  const dashboardPage = new DashboardPage(page);
+  const myPage = new MyPage(page);
 
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await indexPage.goto();
   await indexPage.clickLogin();
   await loginPage.login('jun@example.com', 'pa55w0rd!');
   // マイページが表示される
-  await expect(dashboardPage.rank).toContainText('プレミアム会員');
+  await expect(myPage.rank).toContainText('プレミアム会員');
   // ログアウトする
-  await dashboardPage.logout();
+  await myPage.logout();
 });
 
 /**
@@ -30,16 +30,16 @@ test('TC001', async ({ page }) => {
 test('TC002', async ({ page }) => {
   const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
-  const dashboardPage = new DashboardPage(page);
+  const myPage = new MyPage(page);
 
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await indexPage.goto();
   await indexPage.clickLogin();
   await loginPage.login('sakura@example.com', 'pass1234');
   // マイページが表示される
-  await expect(dashboardPage.rank).toContainText('一般会員');
+  await expect(myPage.rank).toContainText('一般会員');
   // ログアウトする
-  await dashboardPage.logout();
+  await myPage.logout();
 });
 
 /**
@@ -49,7 +49,7 @@ test('TC002', async ({ page }) => {
 test('TC003', async ({ page }) => {
   const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
-  const dashboardPage = new DashboardPage(page);
+  const myPage = new MyPage(page);
 
   // 誤った認証情報でログインボタンをクリックする
   await indexPage.goto();
@@ -69,7 +69,7 @@ test('TC003', async ({ page }) => {
 test('TC004', async ({ page }) => {
   const indexPage = new IndexPage(page);
   const loginPage = new LoginPage(page);
-  const dashboardPage = new DashboardPage(page);
+  const myPage = new MyPage(page);
 
   // 認証情報を未入力でログインボタンをクリックする
   await indexPage.goto();
