@@ -26,7 +26,7 @@ test.afterEach(async ({ page }) => {
   await page.close();
 });
 
-test('会員登録_登録成功', async ({ page }) => {
+test('会員登録成功_プレミアム会員_全項目入力', async ({ page }) => {
   // 会員登録する
   await signupPage.fillEmail('test@example.com');
   await signupPage.fillPassword('qwert123');
@@ -49,6 +49,31 @@ test('会員登録_登録成功', async ({ page }) => {
   await expect(await myPage.getGender()).toContainText('男性');
   await expect(await myPage.getBirthday()).toContainText('1990年10月18日');
   await expect(await myPage.getNotification()).toContainText('受け取る');
+});
+
+test('会員登録成功_一般会員_必須項目のみ入力', async ({ page }) => {
+  // 会員登録する
+  await signupPage.fillEmail('test@example.com');
+  await signupPage.fillPassword('qwert123');
+  await signupPage.fillPasswordConfirmation('qwert123');
+  await signupPage.fillUsername('佐藤花子');
+  await signupPage.checkRankNormal();
+  await signupPage.fillAddress('');
+  await signupPage.fillTel('');
+  await signupPage.selectGenderNotAnswered();
+  await signupPage.fillBirthday('');
+  //await signupPage.checkNotification();
+  await signupPage.clickSubmitButton();
+  // マイページが表示される
+  await expect(page).toHaveURL(/mypage.html/);
+  await expect(await myPage.getEmail()).toContainText('test@example.com');
+  await expect(await myPage.getUserName()).toContainText('佐藤花子');
+  await expect(await myPage.getRank()).toContainText('一般会員');
+  await expect(await myPage.getAddress()).toContainText('未登録');
+  await expect(await myPage.getTel()).toContainText('未登録');
+  await expect(await myPage.getGender()).toContainText('未登録');
+  await expect(await myPage.getBirthday()).toContainText('未登録');
+  await expect(await myPage.getNotification()).toContainText('受け取らない');
 });
 
 test('会員登録_必須項目が未入力', async ({ page }) => {
