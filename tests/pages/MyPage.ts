@@ -1,38 +1,46 @@
 // pages/MyPage.ts
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class MyPage extends BasePage {
 
   public static async initialize(page: Page): Promise<MyPage> {
-      const myPage = new MyPage(page);
-      await expect(page).toHaveURL(/mypage.html/);
-      return myPage;
+    return new MyPage(page);
   }
 
   private constructor(page: Page) {
     super(page);
   }
 
-  public async getEmailLabel():Promise<Locator>{
+  public async getEmail():Promise<Locator>{
     return this.page.locator('#email');
   }
 
-  public async getUserNameLabel():Promise<Locator>{
+  public async getUserName():Promise<Locator>{
     return this.page.locator('#username');
   }
 
-  public async getRankLabel():Promise<Locator>{
+  public async getRank():Promise<Locator>{
     return this.page.locator('#rank');
   }
 
-  public async logout() {
-    const logoutButton = this.page.getByRole('button', { name: 'ログアウト' });
-    await logoutButton.click();
+  public async getAddress():Promise<Locator>{
+    return this.page.locator('#address');
   }
 
-  public async clickReservation() {
-    const reservationLink = this.page.getByRole('link', { name: '宿泊予約' });
-    await reservationLink.click();
+  public async getTel():Promise<Locator>{
+    return this.page.locator('#tel');
+  }
+
+  public async getGender():Promise<Locator>{
+    return this.page.locator('#gender');
+  }
+
+  public async getBirthday():Promise<Locator>{
+    return this.page.locator('#birthday');
+  }
+
+  public async getNotification():Promise<Locator>{
+    return this.page.locator('#notification');
   }
 }

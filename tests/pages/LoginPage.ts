@@ -1,36 +1,34 @@
 // pages/LoginPage.ts
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
-  private readonly emailInput: Locator;
-  private readonly passwordInput: Locator;
-  private readonly loginButton: Locator;
 
   public static async initialize(page: Page): Promise<LoginPage> {
-      const loginPage = new LoginPage(page);
-      await expect(page).toHaveURL(/login.html/);
-      return loginPage;
+    return new LoginPage(page);
   }
 
   private constructor(page: Page) {
     super(page);
-    this.emailInput = page.locator('#email');
-    this.passwordInput = page.locator('#password');
-    this.loginButton = page.locator('#login-button');
   }
 
-  public async login(email: string, password: string) {
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
-    await this.loginButton.click();
+  public async fillEmail(email: string){
+    await this.page.fill('#email',email);
   }
 
-  public async getEmailMessageLabel():Promise<Locator>{
+  public async fillPassword(password: string){
+    await this.page.fill('#password',password);
+  }
+
+  public async clickLoginButton(){
+    await this.page.click('#login-button');
+  }
+
+  public async getEmailMessage():Promise<Locator>{
     return this.page.locator('#email-message');
   }
 
-  public async getPasswordMessageLabel():Promise<Locator>{
+  public async getPasswordMessage():Promise<Locator>{
     return this.page.locator('#password-message');
   }
 }
