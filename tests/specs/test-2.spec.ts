@@ -26,7 +26,7 @@ test.afterEach(async ({ page }) => {
   await page.close();
 });
 
-test('宿泊予約完了_プレミアム会員', async ({ page }) => {
+test('宿泊予約完了_プレミアムプラン', async ({ page }) => {
   // ログイン画面に遷移する
   await homePage.navigateToLogin();
   await expect(page).toHaveURL(/login.html/);

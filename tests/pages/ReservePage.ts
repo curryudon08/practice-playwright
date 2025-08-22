@@ -64,4 +64,20 @@ export class ReservePage extends BasePage {
   public async clickSubmitButton(){
     await this.page.locator('#submit-button').click();
   }
+
+  public async getDateMessage():Promise<Locator>{
+    return this.page.locator('//*[@id=\"reserve-form\"]/div/div[1]/div[1]/div');
+  }
+
+  public async getTermMessage():Promise<Locator>{
+    return this.page.locator('//*[@id=\"reserve-form\"]/div/div[1]/div[2]/div/div[2]');
+  }
+
+  public async getHeadCountMessage():Promise<Locator>{
+    return this.page.locator('//*[@id=\"reserve-form\"]/div/div[1]/div[3]/div/div[2]');
+  }
+
+  public async getUsernameMessage():Promise<Locator>{
+    return this.page.locator('//*[@id=\"reserve-form\"]/div/div[1]/div[7]/div');
+  }
 }
