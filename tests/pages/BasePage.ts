@@ -12,16 +12,13 @@ export class BasePage {
     await this.page.getByRole('link', { name: 'ホーム' }).click() ;
   }
 
-  public async navigateToReservation() {
+  public async navigateToPlans() {
     await this.page.getByRole('link', { name: '宿泊予約' }).click();
   }
 
-  /** 
   public async navigateToSignup() {
-    const reservationLink = this.page.getByRole('link', { name: '会員登録' });
-    await reservationLink.click();
+    await this.page.getByRole('link', { name: '会員登録' }).click();
   }
-  */
 
   public async navigateToLogin() {
     await this.page.getByRole('button', { name: 'ログイン' }).click();

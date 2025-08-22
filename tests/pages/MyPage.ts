@@ -43,4 +43,8 @@ export class MyPage extends BasePage {
   public async getNotification():Promise<Locator>{
     return this.page.locator('#notification');
   }
+
+  public async clicDeleteButton(){
+    await this.page.getByRole('button', { name: '退会する' }).click();
+  }  
 }
