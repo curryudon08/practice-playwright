@@ -12,8 +12,12 @@ test.beforeEach(async ({ page }) => {
   homePage = await HomePage.initialize(page);
   loginPage = await LoginPage.initialize(page);
   myPage = await MyPage.initialize(page);
+  // ホーム画面に遷移する
   await page.goto('https://hotel-example-site.takeyaqa.dev/ja/index.html');
   await expect(page).toHaveURL(/index.html/);
+  // ログイン画面に遷移する
+  await homePage.navigateToLogin();
+  await expect(page).toHaveURL(/login.html/);
 });
 
 test.afterEach(async ({ page }) => {
@@ -21,9 +25,6 @@ test.afterEach(async ({ page }) => {
 });
 
 test('ログイン認証成功_プレミアム会員', async ({ page }) => {
-  // ログイン画面に遷移する
-  await homePage.navigateToLogin();
-  await expect(page).toHaveURL(/login.html/);
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await loginPage.fillEmail('jun@example.com');
   await loginPage.fillPassword('pa55w0rd!');
@@ -41,9 +42,6 @@ test('ログイン認証成功_プレミアム会員', async ({ page }) => {
 });
 
 test('ログイン認証成功_一般会員', async ({ page }) => {
-  // ログイン画面に遷移する
-  await homePage.navigateToLogin();
-  await expect(page).toHaveURL(/login.html/);
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await loginPage.fillEmail('sakura@example.com');
   await loginPage.fillPassword('pass1234');
@@ -61,9 +59,6 @@ test('ログイン認証成功_一般会員', async ({ page }) => {
 });
 
 test('ログイン認証失敗_誤った認証情報', async ({ page }) => {
-  // ログイン画面に遷移する
-  await homePage.navigateToLogin();
-  await expect(page).toHaveURL(/login.html/);
   // 誤った認証情報でログインボタンをクリックする
   await loginPage.fillEmail('xxxxx@example.com');
   await loginPage.fillPassword('xxxxx');
@@ -76,9 +71,6 @@ test('ログイン認証失敗_誤った認証情報', async ({ page }) => {
 });
 
 test('ログイン認証失敗_認証情報が未入力', async ({ page }) => {
-  // ログイン画面に遷移する
-  await homePage.navigateToLogin();
-  await expect(page).toHaveURL(/login.html/);
   // 認証情報を未入力でログインボタンをクリックする
   await loginPage.fillEmail('');
   await loginPage.fillPassword('');
