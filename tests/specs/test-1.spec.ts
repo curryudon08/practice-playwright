@@ -20,11 +20,7 @@ test.afterEach(async ({ page }) => {
   await page.close();
 });
 
-/**
- * ログイン認証成功
- * プレミアム会員
- */
-test('TC001', async ({ page }) => {
+test('ログイン認証成功_プレミアム会員', async ({ page }) => {
   // ログイン画面に遷移する
   await homePage.navigateToLogin();
   await expect(page).toHaveURL(/login.html/);
@@ -44,11 +40,7 @@ test('TC001', async ({ page }) => {
   await expect(await myPage.getNotification()).toContainText('受け取らない');
 });
 
-/**
- * ログイン認証成功
- * 一般会員
- */
-test('TC002', async ({ page }) => {
+test('ログイン認証成功_一般会員', async ({ page }) => {
   // ログイン画面に遷移する
   await homePage.navigateToLogin();
   await expect(page).toHaveURL(/login.html/);
@@ -68,11 +60,7 @@ test('TC002', async ({ page }) => {
   await expect(await myPage.getNotification()).toContainText('受け取らない');
 });
 
-/**
- * ログイン認証失敗
- * 誤った認証情報
- */
-test('TC003', async ({ page }) => {
+test('ログイン認証失敗_誤った認証情報', async ({ page }) => {
   // ログイン画面に遷移する
   await homePage.navigateToLogin();
   await expect(page).toHaveURL(/login.html/);
@@ -87,11 +75,7 @@ test('TC003', async ({ page }) => {
   await expect(await loginPage.getPasswordMessage()).toContainText('メールアドレスまたはパスワードが違います。');
 });
 
-/**
- * ログイン認証失敗
- * 認証情報が未入力
- */
-test('TC004', async ({ page }) => {
+test('ログイン認証失敗_認証情報が未入力', async ({ page }) => {
   // ログイン画面に遷移する
   await homePage.navigateToLogin();
   await expect(page).toHaveURL(/login.html/);
