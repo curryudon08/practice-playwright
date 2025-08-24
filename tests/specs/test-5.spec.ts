@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/HomePage.ts';
-import { LoginPage } from '../pages/LoginPage';
+import { LoginPage } from '../pages/LoginPage.ts';
 import { MyPage } from '../pages/MyPage.ts';
 import { PlanPage } from '../pages/PlanPage.ts';
-import { expectedPlansNotLogin, expectedPlansPremium, expectedPlansNormal } from '../testdata/plans.ts'
+import * as userData from '../testdata/userData.json';
+import * as planData from '../testdata/planData.json';
 
 let homePage: HomePage;
 let loginPage: LoginPage;
@@ -29,24 +30,25 @@ test('宿泊プラン一覧_未ログイン', async ({ page }) => {
   await homePage.navigateToPlans();
   await expect(page).toHaveURL(/plans.html/);
   // 各プランの詳細を確認する
-  for (let i = 0; i < expectedPlansNotLogin.length; i++) {
-    const expectedPlan = expectedPlansNotLogin[i];
-    // プラン名の検証
-    const nameLocator = await planPage.getPlanName(expectedPlan.name);
-    const actualName = await nameLocator.innerText();
-    expect(actualName.trim()).toBe(expectedPlan.name);
-    // 価格の検証
-    const priceLocator = await planPage.getPlanPrice(expectedPlan.name);
-    const actualPrice = await priceLocator.innerText();
-    expect(actualPrice.trim()).toBe(expectedPlan.price);
-    // 定員の検証
-    const capacityLocator = await planPage.getPlanCapacity(expectedPlan.name);
-    const actualCapacity = await capacityLocator.innerText();
-    expect(actualCapacity.trim()).toBe(expectedPlan.capacity);
-    // 客室タイプの検証
-    const roomTypeLocator = await planPage.getPlanRoomType(expectedPlan.name,expectedPlan.roomType);
-    const actualRoomType = await roomTypeLocator.innerText();
-    expect(actualRoomType.trim()).toBe(expectedPlan.roomType);
+  for (const [planId, expectedPlan] of Object.entries(planData)) {
+    if(expectedPlan.type == 'free'){
+      // プラン名の検証
+      const nameLocator = await planPage.getPlanName(expectedPlan.name);
+      const actualName = await nameLocator.innerText();
+      expect(actualName.trim()).toBe(expectedPlan.name);
+      // 価格の検証
+      const priceLocator = await planPage.getPlanPrice(expectedPlan.name);
+      const actualPrice = await priceLocator.innerText();
+      expect(actualPrice.trim()).toBe(expectedPlan.price);
+      // 定員の検証
+      const capacityLocator = await planPage.getPlanCapacity(expectedPlan.name);
+      const actualCapacity = await capacityLocator.innerText();
+      expect(actualCapacity.trim()).toBe(expectedPlan.capacity);
+      // 客室タイプの検証
+      const roomTypeLocator = await planPage.getPlanRoomType(expectedPlan.name,expectedPlan.roomType);
+      const actualRoomType = await roomTypeLocator.innerText();
+      expect(actualRoomType.trim()).toBe(expectedPlan.roomType);
+    }
   }
 });
 
@@ -55,8 +57,8 @@ test('宿泊プラン一覧_プレミアム会員', async ({ page }) => {
   await homePage.navigateToLogin();
   await expect(page).toHaveURL(/login.html/);
   // ログインID（メールアドレス）、パスワードを入力してログインする
-  await loginPage.fillEmail('jun@example.com');
-  await loginPage.fillPassword('pa55w0rd!');
+  await loginPage.fillEmail(userData.user3.email);
+  await loginPage.fillPassword(userData.user3.password);
   await loginPage.clickLoginButton();
   // マイページが表示される
   await expect(page).toHaveURL(/mypage.html/);
@@ -64,24 +66,25 @@ test('宿泊プラン一覧_プレミアム会員', async ({ page }) => {
   await homePage.navigateToPlans();
   await expect(page).toHaveURL(/plans.html/);
   // 各プランの詳細を確認する
-  for (let i = 0; i < expectedPlansPremium.length; i++) {
-    const expectedPlan = expectedPlansPremium[i];
-    // プラン名の検証
-    const nameLocator = await planPage.getPlanName(expectedPlan.name);
-    const actualName = await nameLocator.innerText();
-    expect(actualName.trim()).toBe(expectedPlan.name);
-    // 価格の検証
-    const priceLocator = await planPage.getPlanPrice(expectedPlan.name);
-    const actualPrice = await priceLocator.innerText();
-    expect(actualPrice.trim()).toBe(expectedPlan.price);
-    // 定員の検証
-    const capacityLocator = await planPage.getPlanCapacity(expectedPlan.name);
-    const actualCapacity = await capacityLocator.innerText();
-    expect(actualCapacity.trim()).toBe(expectedPlan.capacity);
-    // 客室タイプの検証
-    const roomTypeLocator = await planPage.getPlanRoomType(expectedPlan.name,expectedPlan.roomType);
-    const actualRoomType = await roomTypeLocator.innerText();
-    expect(actualRoomType.trim()).toBe(expectedPlan.roomType);
+  for (const [planId, expectedPlan] of Object.entries(planData)) {
+    if(expectedPlan.type == 'free' || expectedPlan.type == 'normal' || expectedPlan.type == 'premium'){
+      // プラン名の検証
+      const nameLocator = await planPage.getPlanName(expectedPlan.name);
+      const actualName = await nameLocator.innerText();
+      expect(actualName.trim()).toBe(expectedPlan.name);
+      // 価格の検証
+      const priceLocator = await planPage.getPlanPrice(expectedPlan.name);
+      const actualPrice = await priceLocator.innerText();
+      expect(actualPrice.trim()).toBe(expectedPlan.price);
+      // 定員の検証
+      const capacityLocator = await planPage.getPlanCapacity(expectedPlan.name);
+      const actualCapacity = await capacityLocator.innerText();
+      expect(actualCapacity.trim()).toBe(expectedPlan.capacity);
+      // 客室タイプの検証
+      const roomTypeLocator = await planPage.getPlanRoomType(expectedPlan.name,expectedPlan.roomType);
+      const actualRoomType = await roomTypeLocator.innerText();
+      expect(actualRoomType.trim()).toBe(expectedPlan.roomType);
+    }
   }
 });
 
@@ -90,8 +93,8 @@ test('宿泊プラン一覧_一般会員', async ({ page }) => {
   await homePage.navigateToLogin();
   await expect(page).toHaveURL(/login.html/);
   // ログインID（メールアドレス）、パスワードを入力してログインする
-  await loginPage.fillEmail('sakura@example.com');
-  await loginPage.fillPassword('pass1234');
+  await loginPage.fillEmail(userData.user2.email);
+  await loginPage.fillPassword(userData.user2.password);
   await loginPage.clickLoginButton();
   // マイページが表示される
   await expect(page).toHaveURL(/mypage.html/);
@@ -99,23 +102,24 @@ test('宿泊プラン一覧_一般会員', async ({ page }) => {
   await homePage.navigateToPlans();
   await expect(page).toHaveURL(/plans.html/);
   // 各プランの詳細を確認する
-  for (let i = 0; i < expectedPlansNormal.length; i++) {
-    const expectedPlan = expectedPlansNormal[i];
-    // プラン名の検証
-    const nameLocator = await planPage.getPlanName(expectedPlan.name);
-    const actualName = await nameLocator.innerText();
-    expect(actualName.trim()).toBe(expectedPlan.name);
-    // 価格の検証
-    const priceLocator = await planPage.getPlanPrice(expectedPlan.name);
-    const actualPrice = await priceLocator.innerText();
-    expect(actualPrice.trim()).toBe(expectedPlan.price);
-    // 定員の検証
-    const capacityLocator = await planPage.getPlanCapacity(expectedPlan.name);
-    const actualCapacity = await capacityLocator.innerText();
-    expect(actualCapacity.trim()).toBe(expectedPlan.capacity);
-    // 客室タイプの検証
-    const roomTypeLocator = await planPage.getPlanRoomType(expectedPlan.name,expectedPlan.roomType);
-    const actualRoomType = await roomTypeLocator.innerText();
-    expect(actualRoomType.trim()).toBe(expectedPlan.roomType);
+  for (const [planId, expectedPlan] of Object.entries(planData)) {
+    if(expectedPlan.type == 'free' || expectedPlan.type == 'normal'){
+      // プラン名の検証
+      const nameLocator = await planPage.getPlanName(expectedPlan.name);
+      const actualName = await nameLocator.innerText();
+      expect(actualName.trim()).toBe(expectedPlan.name);
+      // 価格の検証
+      const priceLocator = await planPage.getPlanPrice(expectedPlan.name);
+      const actualPrice = await priceLocator.innerText();
+      expect(actualPrice.trim()).toBe(expectedPlan.price);
+      // 定員の検証
+      const capacityLocator = await planPage.getPlanCapacity(expectedPlan.name);
+      const actualCapacity = await capacityLocator.innerText();
+      expect(actualCapacity.trim()).toBe(expectedPlan.capacity);
+      // 客室タイプの検証
+      const roomTypeLocator = await planPage.getPlanRoomType(expectedPlan.name,expectedPlan.roomType);
+      const actualRoomType = await roomTypeLocator.innerText();
+      expect(actualRoomType.trim()).toBe(expectedPlan.roomType);
+    }
   }
 });

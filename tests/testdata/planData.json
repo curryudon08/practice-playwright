@@ -1,0 +1,74 @@
+
+{
+    "plan1": {
+        "name": "素泊まり",
+        "price": "大人1名5,500円",
+        "roomType": "シングル",
+        "capacity": "1名様から",
+        "type":"free"
+    },
+    "plan2": {
+        "name": "出張ビジネスプラン",
+        "price": "大人1名7,500円",
+        "roomType": "シングル",
+        "capacity": "1名様から",
+        "type":"free"
+
+    },
+    "plan3": {
+        "name": "エステ・マッサージプラン",
+        "price": "大人1名9,000円",
+        "roomType": "部屋指定なし",
+        "capacity": "1名様から",
+        "type":"free"
+    },
+    "plan4": {
+        "name": "貸し切り露天風呂プラン",
+        "price": "大人1名9,000円",
+        "roomType": "部屋指定なし",
+        "capacity": "1名様から",
+        "type":"free"
+    },
+    "plan5": {
+        "name": "カップル限定プラン",
+        "price": "大人1名8,000円",
+        "roomType": "プレミアムツイン",
+        "capacity": "2名様から",
+        "type":"free"
+    },
+    "plan6": {
+        "name": "テーマパーク優待プラン",
+        "price": "大人1名10,000円",
+        "roomType": "部屋指定なし",
+        "capacity": "1名様から",
+        "type":"free"
+    },
+    "plan7":{
+        "name": "お得な特典付きプラン",
+        "price": "大人1名7,000円",
+        "roomType": "スタンダードツイン",
+        "capacity": "1名様から",
+        "type":"free"
+    },
+    "plan8":{
+        "name": "ディナー付きプラン",
+        "price": "大人1名8,500円",
+        "roomType": "部屋指定なし",
+        "capacity": "1名様から",
+        "type":"normal"
+    },
+    "plan9":{
+        "name": "お得なプラン",
+        "price": "大人1名6,000円",
+        "roomType": "部屋指定なし",
+        "capacity": "1名様から",
+        "type":"normal"
+    },
+    "plan10":{
+        "name": "プレミアムプラン",
+        "price": "大人1名10,000円",
+        "roomType": "プレミアムツイン",
+        "capacity": "2名様から",
+        "type":"premium"
+    }
+}
