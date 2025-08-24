@@ -24,7 +24,41 @@ test.afterEach(async ({ page }) => {
   await page.close();
 });
 
-test('ログイン認証成功_プレミアム会員', async ({ page }) => {
+test('ログイン認証成功_登録済みユーザ1', async ({ page }) => {
+  // ログインID（メールアドレス）、パスワードを入力してログインする
+  await loginPage.fillEmail('ichiro@example.com');
+  await loginPage.fillPassword('password');
+  await loginPage.clickLoginButton();
+  // マイページが表示される
+  await expect(page).toHaveURL(/mypage.html/);
+  await expect(await myPage.getEmail()).toContainText('ichiro@example.com');
+  await expect(await myPage.getUserName()).toContainText('山田一郎');
+  await expect(await myPage.getRank()).toContainText('プレミアム会員');
+  await expect(await myPage.getAddress()).toContainText('東京都豊島区池袋');
+  await expect(await myPage.getTel()).toContainText('01234567891');
+  await expect(await myPage.getGender()).toContainText('男性');
+  await expect(await myPage.getBirthday()).toContainText('未登録');
+  await expect(await myPage.getNotification()).toContainText('受け取る');
+});
+
+test('ログイン認証成功_登録済みユーザ2', async ({ page }) => {
+  // ログインID（メールアドレス）、パスワードを入力してログインする
+  await loginPage.fillEmail('sakura@example.com');
+  await loginPage.fillPassword('pass1234');
+  await loginPage.clickLoginButton();
+  // マイページが表示される
+  await expect(page).toHaveURL(/mypage.html/);
+  await expect(await myPage.getEmail()).toContainText('sakura@example.com');
+  await expect(await myPage.getUserName()).toContainText('松本さくら');
+  await expect(await myPage.getRank()).toContainText('一般会員');
+  await expect(await myPage.getAddress()).toContainText('神奈川県横浜市鶴見区大黒ふ頭');
+  await expect(await myPage.getTel()).toContainText('未登録');
+  await expect(await myPage.getGender()).toContainText('女性');
+  await expect(await myPage.getBirthday()).toContainText('2000年4月1日');
+  await expect(await myPage.getNotification()).toContainText('受け取らない');
+});
+
+test('ログイン認証成功_登録済みユーザ3', async ({ page }) => {
   // ログインID（メールアドレス）、パスワードを入力してログインする
   await loginPage.fillEmail('jun@example.com');
   await loginPage.fillPassword('pa55w0rd!');
@@ -41,21 +75,21 @@ test('ログイン認証成功_プレミアム会員', async ({ page }) => {
   await expect(await myPage.getNotification()).toContainText('受け取らない');
 });
 
-test('ログイン認証成功_一般会員', async ({ page }) => {
+test('ログイン認証成功_登録済みユーザ4', async ({ page }) => {
   // ログインID（メールアドレス）、パスワードを入力してログインする
-  await loginPage.fillEmail('sakura@example.com');
-  await loginPage.fillPassword('pass1234');
+  await loginPage.fillEmail('yoshiki@example.com');
+  await loginPage.fillPassword('pass-pass');
   await loginPage.clickLoginButton();
   // マイページが表示される
   await expect(page).toHaveURL(/mypage.html/);
-  await expect(await myPage.getEmail()).toContainText('sakura@example.com');
-  await expect(await myPage.getUserName()).toContainText('松本さくら');
+  await expect(await myPage.getEmail()).toContainText('yoshiki@example.com');
+  await expect(await myPage.getUserName()).toContainText('木村良樹');
   await expect(await myPage.getRank()).toContainText('一般会員');
-  await expect(await myPage.getAddress()).toContainText('神奈川県横浜市鶴見区大黒ふ頭');
-  await expect(await myPage.getTel()).toContainText('未登録');
-  await expect(await myPage.getGender()).toContainText('女性');
-  await expect(await myPage.getBirthday()).toContainText('2000年4月1日');
-  await expect(await myPage.getNotification()).toContainText('受け取らない');
+  await expect(await myPage.getAddress()).toContainText('未登録');
+  await expect(await myPage.getTel()).toContainText('01298765432');
+  await expect(await myPage.getGender()).toContainText('未登録');
+  await expect(await myPage.getBirthday()).toContainText('1992年8月31日');
+  await expect(await myPage.getNotification()).toContainText('受け取る');
 });
 
 test('ログイン認証失敗_誤った認証情報', async ({ page }) => {
