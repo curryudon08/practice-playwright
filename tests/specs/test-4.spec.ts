@@ -26,7 +26,7 @@ test.afterEach(async ({ page }) => {
   await page.close();
 });
 
-test('会員登録成功_プレミアム会員_全項目入力', async ({ page }) => {
+test('会員登録成功_全項目入力', async ({ page }) => {
   // 会員登録する
   await signupPage.fillEmail('test@example.com');
   await signupPage.fillPassword('qwert123');
@@ -51,7 +51,7 @@ test('会員登録成功_プレミアム会員_全項目入力', async ({ page }
   await expect(await myPage.getNotification()).toContainText('受け取る');
 });
 
-test('会員登録成功_一般会員_必須項目のみ入力', async ({ page }) => {
+test('会員登録成功_必須項目のみ入力', async ({ page }) => {
   // 会員登録する
   await signupPage.fillEmail('test@example.com');
   await signupPage.fillPassword('qwert123');
@@ -76,7 +76,7 @@ test('会員登録成功_一般会員_必須項目のみ入力', async ({ page }
   await expect(await myPage.getNotification()).toContainText('受け取らない');
 });
 
-test('会員登録_必須項目が未入力', async ({ page }) => {
+test('会員登録エラー_必須項目が未入力', async ({ page }) => {
   // 未入力で会員登録する
   await signupPage.clickSubmitButton();
   // エラーメッセージを確認する
@@ -90,7 +90,7 @@ test('会員登録_必須項目が未入力', async ({ page }) => {
   await expect(await signupPage.getUsernameMessage()).toContainText('このフィールドを入力してください。');
 });
 
-test('会員登録_メールアドレスのフォーマットエラー', async ({ page }) => {
+test('会員登録エラー_メールアドレスのフォーマットエラー', async ({ page }) => {
   // 会員登録する
   await signupPage.fillEmail('abc');
   await signupPage.clickSubmitButton();
@@ -99,7 +99,7 @@ test('会員登録_メールアドレスのフォーマットエラー', async (
   await expect(await signupPage.getEmailMessage()).toContainText('メールアドレスを入力してください。');
 });
 
-test('会員登録_登録済みメールアドレス', async ({ page }) => {
+test('会員登録エラー_登録済みメールアドレス', async ({ page }) => {
   // 会員登録する
   await signupPage.fillEmail('jun@example.com');
   await signupPage.clickSubmitButton();
@@ -108,7 +108,7 @@ test('会員登録_登録済みメールアドレス', async ({ page }) => {
   await expect(await signupPage.getEmailMessage()).toContainText('このメールアドレスはすでに登録済みです。');
 });
 
-test('会員登録_電話番号のフォーマットエラー', async ({ page }) => {
+test('会員登録エラー_電話番号のフォーマットエラー', async ({ page }) => {
   // 会員登録する
   await signupPage.fillTel('qwertyuiopa');
   await signupPage.clickSubmitButton();
@@ -117,7 +117,7 @@ test('会員登録_電話番号のフォーマットエラー', async ({ page })
   await expect(await signupPage.getTelMessage()).toContainText('指定されている形式で入力してください。');
 });
 
-test('会員登録_パスワードのフォーマットエラー', async ({ page }) => {
+test('会員登録エラー_パスワードのフォーマットエラー', async ({ page }) => {
   // 会員登録する
   await signupPage.fillPassword('a');
   await signupPage.fillPasswordConfirmation('a');
@@ -129,7 +129,7 @@ test('会員登録_パスワードのフォーマットエラー', async ({ page
   await expect(await signupPage.getPasswordConfirmationMessage()).toContainText('8文字以上で入力してください。');
 });
 
-test('会員登録_パスワードが一致しない', async ({ page }) => {
+test('会員登録エラー_パスワードが一致しない', async ({ page }) => {
   // 会員登録する
   await signupPage.fillPassword('qwert123');
   await signupPage.fillPasswordConfirmation('qwert12345');
