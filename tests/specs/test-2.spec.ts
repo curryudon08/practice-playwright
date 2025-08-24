@@ -41,7 +41,7 @@ test('宿泊予約完了_プレミアムプラン', async ({ page }) => {
   await loginPage.navigateToPlans();
   await expect(page).toHaveURL(/plans.html/);
   // 宿泊プランを選択して予約フォームに遷移する
-  const plan = await planPage.navigateToReserve(/^プレミアムプラン大人1名10,000円2名様からプレミアムツインこのプランで予約$/);
+  const plan = await planPage.navigateToReserve('プレミアムプラン');
   const reservePage =  await ReservePage.initialize(plan);
   await expect(plan).toHaveURL(/reserve.html/);
   // 予約内容を登録する（必須入力のみ）
