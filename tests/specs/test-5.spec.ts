@@ -39,11 +39,11 @@ test('宿泊プラン一覧_未ログイン', async ({ page }) => {
       // 価格の検証
       const priceLocator = await planPage.getPlanPrice(expectedPlan.name);
       const actualPrice = await priceLocator.innerText();
-      expect(actualPrice.trim()).toBe(expectedPlan.price);
+      expect(actualPrice.trim()).toBe(`大人1名${expectedPlan.price.toLocaleString()}円`);
       // 定員の検証
       const capacityLocator = await planPage.getPlanCapacity(expectedPlan.name);
       const actualCapacity = await capacityLocator.innerText();
-      expect(actualCapacity.trim()).toBe(expectedPlan.capacity);
+      expect(actualCapacity.trim()).toBe(expectedPlan.capacity + '名様から');
       // 客室タイプの検証
       const roomTypeLocator = await planPage.getPlanRoomType(expectedPlan.name,expectedPlan.roomType);
       const actualRoomType = await roomTypeLocator.innerText();
@@ -75,11 +75,11 @@ test('宿泊プラン一覧_プレミアム会員', async ({ page }) => {
       // 価格の検証
       const priceLocator = await planPage.getPlanPrice(expectedPlan.name);
       const actualPrice = await priceLocator.innerText();
-      expect(actualPrice.trim()).toBe(expectedPlan.price);
+      expect(actualPrice.trim()).toBe(`大人1名${expectedPlan.price.toLocaleString()}円`);
       // 定員の検証
       const capacityLocator = await planPage.getPlanCapacity(expectedPlan.name);
       const actualCapacity = await capacityLocator.innerText();
-      expect(actualCapacity.trim()).toBe(expectedPlan.capacity);
+      expect(actualCapacity.trim()).toBe(expectedPlan.capacity + '名様から');
       // 客室タイプの検証
       const roomTypeLocator = await planPage.getPlanRoomType(expectedPlan.name,expectedPlan.roomType);
       const actualRoomType = await roomTypeLocator.innerText();
@@ -111,11 +111,11 @@ test('宿泊プラン一覧_一般会員', async ({ page }) => {
       // 価格の検証
       const priceLocator = await planPage.getPlanPrice(expectedPlan.name);
       const actualPrice = await priceLocator.innerText();
-      expect(actualPrice.trim()).toBe(expectedPlan.price);
+      expect(actualPrice.trim()).toBe(`大人1名${expectedPlan.price.toLocaleString()}円`);
       // 定員の検証
       const capacityLocator = await planPage.getPlanCapacity(expectedPlan.name);
       const actualCapacity = await capacityLocator.innerText();
-      expect(actualCapacity.trim()).toBe(expectedPlan.capacity);
+      expect(actualCapacity.trim()).toBe(expectedPlan.capacity + '名様から');
       // 客室タイプの検証
       const roomTypeLocator = await planPage.getPlanRoomType(expectedPlan.name,expectedPlan.roomType);
       const actualRoomType = await roomTypeLocator.innerText();

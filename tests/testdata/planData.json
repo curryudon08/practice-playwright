@@ -2,73 +2,73 @@
 {
     "plan1": {
         "name": "素泊まり",
-        "price": "大人1名5,500円",
+        "price": 5500,
         "roomType": "シングル",
-        "capacity": "1名様から",
+        "capacity": "1",
         "type":"free"
     },
     "plan2": {
         "name": "出張ビジネスプラン",
-        "price": "大人1名7,500円",
+        "price": 7500,
         "roomType": "シングル",
-        "capacity": "1名様から",
+        "capacity": "1",
         "type":"free"
 
     },
     "plan3": {
         "name": "エステ・マッサージプラン",
-        "price": "大人1名9,000円",
+        "price": 9000,
         "roomType": "部屋指定なし",
-        "capacity": "1名様から",
+        "capacity": "1",
         "type":"free"
     },
     "plan4": {
         "name": "貸し切り露天風呂プラン",
-        "price": "大人1名9,000円",
+        "price": 9000,
         "roomType": "部屋指定なし",
-        "capacity": "1名様から",
+        "capacity": "1",
         "type":"free"
     },
     "plan5": {
         "name": "カップル限定プラン",
-        "price": "大人1名8,000円",
+        "price": 8000,
         "roomType": "プレミアムツイン",
-        "capacity": "2名様から",
+        "capacity": "2",
         "type":"free"
     },
     "plan6": {
         "name": "テーマパーク優待プラン",
-        "price": "大人1名10,000円",
+        "price": 10000,
         "roomType": "部屋指定なし",
-        "capacity": "1名様から",
+        "capacity": "1",
         "type":"free"
     },
     "plan7":{
         "name": "お得な特典付きプラン",
-        "price": "大人1名7,000円",
+        "price": 7000,
         "roomType": "スタンダードツイン",
-        "capacity": "1名様から",
+        "capacity": "1",
         "type":"free"
     },
     "plan8":{
         "name": "ディナー付きプラン",
-        "price": "大人1名8,500円",
+        "price": 8500,
         "roomType": "部屋指定なし",
-        "capacity": "1名様から",
+        "capacity": "1",
         "type":"normal"
     },
     "plan9":{
         "name": "お得なプラン",
-        "price": "大人1名6,000円",
+        "price": 6000,
         "roomType": "部屋指定なし",
-        "capacity": "1名様から",
+        "capacity": "1",
         "type":"normal"
     },
     "plan10":{
         "name": "プレミアムプラン",
-        "price": "大人1名10,000円",
+        "price": 10000,
         "roomType": "プレミアムツイン",
-        "capacity": "2名様から",
+        "capacity": "2",
         "type":"premium"
     }
 }
