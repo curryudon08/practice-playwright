@@ -1,0 +1,50 @@
+{
+  "user1": {
+    "email": "ichiro@example.com",
+    "password": "password",
+    "userName": "山田一郎",
+    "rank": "プレミアム会員",
+    "address": "東京都豊島区池袋",
+    "tel": "01234567891",
+    "gender": "男性",
+    "birthday": "未登録",
+    "notification": "受け取る"
+  },
+  "user2": {
+    "email": "sakura@example.com",
+    "password": "pass1234",
+    "userName": "松本さくら",
+    "rank": "一般会員",
+    "address": "神奈川県横浜市鶴見区大黒ふ頭",
+    "tel": "未登録",
+    "gender": "女性",
+    "birthday": "2000年4月1日",
+    "notification": "受け取らない"
+  },
+  "user3": {
+    "email": "jun@example.com",
+    "password": "pa55w0rd!",
+    "userName": "林潤",
+    "rank": "プレミアム会員",
+    "address": "大阪府大阪市北区梅田",
+    "tel": "01212341234",
+    "gender": "その他",
+    "birthday": "1988年12月17日",
+    "notification": "受け取らない"
+  },
+  "user4": {
+    "email": "yoshiki@example.com",
+    "password": "pass-pass",
+    "userName": "木村良樹",
+    "rank": "一般会員",
+    "address": "未登録",
+    "tel": "01298765432",
+    "gender": "未登録",
+    "birthday": "1992年8月31日",
+    "notification": "受け取る"
+  },
+  "user5": {
+    "email": "xxxx@example.com",
+    "password": "xxxxx"
+  }
+}
