@@ -1,11 +1,10 @@
 // test-2.spec.ts
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/HomePage.ts';
-import { LoginPage } from '../pages/LoginPage';
-import { MyPage } from '../pages/MyPage';
+import { LoginPage } from '../pages/LoginPage.ts';
+import { MyPage } from '../pages/MyPage.ts';
 import { PlanPage } from '../pages/PlanPage.ts';
 import { ReservePage } from '../pages/ReservePage.ts';
-import { ConfirmPage } from '../pages/ConfirmPage.ts';
 
 let homePage: HomePage;
 let loginPage: LoginPage;
