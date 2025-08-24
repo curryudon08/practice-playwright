@@ -1,11 +1,12 @@
 // test-2.spec.ts
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/HomePage.ts';
-import { LoginPage } from '../pages/LoginPage';
-import { MyPage } from '../pages/MyPage';
+import { LoginPage } from '../pages/LoginPage.ts';
+import { MyPage } from '../pages/MyPage.ts';
 import { PlanPage } from '../pages/PlanPage.ts';
 import { ReservePage } from '../pages/ReservePage.ts';
 import { ConfirmPage } from '../pages/ConfirmPage.ts';
+import * as userData from '../testdata/userData.json';
 
 let homePage: HomePage;
 let loginPage: LoginPage;
@@ -31,8 +32,8 @@ test('宿泊予約完了_プレミアムプラン', async ({ page }) => {
   await homePage.navigateToLogin();
   await expect(page).toHaveURL(/login.html/);
   // ログインID（メールアドレス）、パスワードを入力してログインする
-  await loginPage.fillEmail('jun@example.com');
-  await loginPage.fillPassword('pa55w0rd!');
+  await loginPage.fillEmail(userData.user3.email);
+  await loginPage.fillPassword(userData.user3.password);
   await loginPage.clickLoginButton();
   // マイページが表示される
   await expect(page).toHaveURL(/mypage.html/);
