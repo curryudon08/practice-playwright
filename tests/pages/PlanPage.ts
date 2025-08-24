@@ -18,4 +18,28 @@ export class PlanPage extends BasePage {
     await link.click();
     return pagePromise;
   }
+
+  public async getPlanName(planName: string):Promise<Locator>{
+    return this.page.locator('h5').filter({ hasText: planName });
+  }
+
+  private async getPlanContainer(planName: string):Promise<Locator>{
+    const planNameLocator = this.page.locator('h5').filter({ hasText: planName });
+    return planNameLocator.locator('..').locator('..');
+  }
+
+  public async getPlanPrice(planName: string):Promise<Locator>{
+    const planContainer = await this.getPlanContainer(planName);
+    return planContainer.locator('li').filter({ hasText: /円/ });
+  }
+
+  public async getPlanCapacity(planName: string):Promise<Locator>{
+    const planContainer = await this.getPlanContainer(planName);
+    return planContainer.locator('li').filter({ hasText: /名様/ });
+  }
+
+  public async getPlanRoomType(planName: string, roomType: string):Promise<Locator>{
+    const planContainer = await this.getPlanContainer(planName);
+    return planContainer.locator('li').filter({ hasText: new RegExp(roomType.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))});
+  }
 }
