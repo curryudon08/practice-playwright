@@ -12,8 +12,9 @@ export class PlanPage extends BasePage {
     super(page);
   }
 
-  public async navigateToReserve(regex): Promise<Page> {
-    const link = this.page.locator('div').filter({ hasText: regex }).getByRole('link');
+  public async navigateToReserve(planName: string): Promise<Page> {
+    const planContainer = await this.getPlanContainer(planName);
+    const link = planContainer.locator('a').filter({ hasText: /このプランで予約/ });
     const pagePromise = this.page.waitForEvent('popup');
     await link.click();
     return pagePromise;

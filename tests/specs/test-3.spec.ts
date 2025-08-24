@@ -30,7 +30,7 @@ test.afterEach(async ({ page }) => {
 
 test('宿泊予約エラー_必須項目が未入力', async ({ page }) => {
   // 宿泊プランを選択して予約フォームに遷移する
-  const plan = await planPage.navigateToReserve(/^素泊まり大人1名5,500円1名様からシングルこのプランで予約$/);
+  const plan = await planPage.navigateToReserve('素泊まり');
   const reservePage =  await ReservePage.initialize(plan);
   await expect(plan).toHaveURL(/reserve.html/);
   // 予約内容を登録する
@@ -52,7 +52,7 @@ test('宿泊予約エラー_必須項目が未入力', async ({ page }) => {
 
 test('宿泊予約エラー_宿泊数のフォーマットエラー', async ({ page }) => {
   // 宿泊プランを選択して予約フォームに遷移する
-  const plan = await planPage.navigateToReserve(/^素泊まり大人1名5,500円1名様からシングルこのプランで予約$/);
+  const plan = await planPage.navigateToReserve('素泊まり');
   const reservePage =  await ReservePage.initialize(plan);
   await expect(plan).toHaveURL(/reserve.html/);
   // 予約内容を登録する
@@ -71,7 +71,7 @@ test('宿泊予約エラー_宿泊数のフォーマットエラー', async ({ p
 
 test('宿泊予約エラー_人数のフォーマットエラー（シングルプラン）', async ({ page }) => {
   // 宿泊プランを選択して予約フォームに遷移する
-  const plan = await planPage.navigateToReserve(/^素泊まり大人1名5,500円1名様からシングルこのプランで予約$/);
+  const plan = await planPage.navigateToReserve('素泊まり');
   const reservePage =  await ReservePage.initialize(plan);
   await expect(plan).toHaveURL(/reserve.html/);
   // 予約内容を登録する
@@ -90,7 +90,7 @@ test('宿泊予約エラー_人数のフォーマットエラー（シングル�
 
 test('宿泊予約エラー_宿泊日のフォーマットエラー', async ({ page }) => {
   // 宿泊プランを選択して予約フォームに遷移する
-  const plan = await planPage.navigateToReserve(/^素泊まり大人1名5,500円1名様からシングルこのプランで予約$/);
+  const plan = await planPage.navigateToReserve('素泊まり');
   const reservePage =  await ReservePage.initialize(plan);
   await expect(plan).toHaveURL(/reserve.html/);
   // 予約内容を登録する
