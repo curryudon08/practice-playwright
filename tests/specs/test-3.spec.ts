@@ -28,81 +28,83 @@ test.afterEach(async ({ page }) => {
   await page.close();
 });
 
-test('宿泊予約エラー_必須項目が未入力', async ({ page }) => {
-  // 宿泊プランを選択して予約フォームに遷移する
-  const plan = await planPage.navigateToReserve('素泊まり');
-  const reservePage =  await ReservePage.initialize(plan);
-  await expect(plan).toHaveURL(/reserve.html/);
-  // 予約内容を登録する
-  await reservePage.fillDate('');
-  await reservePage.fillTerm('');
-  await reservePage.fillHeadCount('');
-  await reservePage.fillUsername('');
-  await reservePage.clickSubmitButton();
-  // エラーメッセージを確認する
-  //await expect(await reservePage.getDateMessage()).toBeVisible();
-  await expect(await reservePage.getDateMessage()).toContainText('このフィールドを入力してください。');
-  await expect(await reservePage.getTermMessage()).toBeVisible();
-  await expect(await reservePage.getTermMessage()).toContainText('このフィールドを入力してください。');
-  await expect(await reservePage.getHeadCountMessage()).toBeVisible();
-  await expect(await reservePage.getHeadCountMessage()).toContainText('このフィールドを入力してください。');
-  await expect(await reservePage.getUsernameMessage()).toBeVisible();
-  await expect(await reservePage.getUsernameMessage()).toContainText('このフィールドを入力してください。');
-});
+test.describe('宿泊予約エラー', () => {
+  test('宿泊予約エラー_必須項目が未入力', async ({ page }) => {
+    // 宿泊プランを選択して予約フォームに遷移する
+    const plan = await planPage.navigateToReserve('素泊まり');
+    const reservePage = await ReservePage.initialize(plan);
+    await expect(plan).toHaveURL(/reserve.html/);
+    // 予約内容を登録する
+    await reservePage.fillDate('');
+    await reservePage.fillTerm('');
+    await reservePage.fillHeadCount('');
+    await reservePage.fillUsername('');
+    await reservePage.clickSubmitButton();
+    // エラーメッセージを確認する
+    //await expect(await reservePage.getDateMessage()).toBeVisible();
+    await expect(await reservePage.getDateMessage()).toContainText('このフィールドを入力してください。');
+    await expect(await reservePage.getTermMessage()).toBeVisible();
+    await expect(await reservePage.getTermMessage()).toContainText('このフィールドを入力してください。');
+    await expect(await reservePage.getHeadCountMessage()).toBeVisible();
+    await expect(await reservePage.getHeadCountMessage()).toContainText('このフィールドを入力してください。');
+    await expect(await reservePage.getUsernameMessage()).toBeVisible();
+    await expect(await reservePage.getUsernameMessage()).toContainText('このフィールドを入力してください。');
+  });
 
-test('宿泊予約エラー_宿泊数のフォーマットエラー', async ({ page }) => {
-  // 宿泊プランを選択して予約フォームに遷移する
-  const plan = await planPage.navigateToReserve('素泊まり');
-  const reservePage =  await ReservePage.initialize(plan);
-  await expect(plan).toHaveURL(/reserve.html/);
-  // 予約内容を登録する
-  await reservePage.fillTerm('');
-  await reservePage.fillTerm('0');
-  await reservePage.clickSubmitButton();
-  await expect(await reservePage.getTermMessage()).toBeVisible();
-  await expect(await reservePage.getTermMessage()).toContainText('1以上の値を入力してください。');
-  // 予約内容を登録する
-  await reservePage.fillTerm('');
-  await reservePage.fillTerm('10');
-  await reservePage.clickSubmitButton();
-  await expect(await reservePage.getTermMessage()).toBeVisible();
-  await expect(await reservePage.getTermMessage()).toContainText('9以下の値を入力してください。');
-});
+  test('宿泊予約エラー_宿泊数のフォーマットエラー', async ({ page }) => {
+    // 宿泊プランを選択して予約フォームに遷移する
+    const plan = await planPage.navigateToReserve('素泊まり');
+    const reservePage = await ReservePage.initialize(plan);
+    await expect(plan).toHaveURL(/reserve.html/);
+    // 予約内容を登録する
+    await reservePage.fillTerm('');
+    await reservePage.fillTerm('0');
+    await reservePage.clickSubmitButton();
+    await expect(await reservePage.getTermMessage()).toBeVisible();
+    await expect(await reservePage.getTermMessage()).toContainText('1以上の値を入力してください。');
+    // 予約内容を登録する
+    await reservePage.fillTerm('');
+    await reservePage.fillTerm('10');
+    await reservePage.clickSubmitButton();
+    await expect(await reservePage.getTermMessage()).toBeVisible();
+    await expect(await reservePage.getTermMessage()).toContainText('9以下の値を入力してください。');
+  });
 
-test('宿泊予約エラー_人数のフォーマットエラー（シングルプラン）', async ({ page }) => {
-  // 宿泊プランを選択して予約フォームに遷移する
-  const plan = await planPage.navigateToReserve('素泊まり');
-  const reservePage =  await ReservePage.initialize(plan);
-  await expect(plan).toHaveURL(/reserve.html/);
-  // 予約内容を登録する
-  await reservePage.fillHeadCount('');
-  await reservePage.fillHeadCount('0');
-  await reservePage.clickSubmitButton();
-  await expect(await reservePage.getHeadCountMessage()).toBeVisible();
-  await expect(await reservePage.getHeadCountMessage()).toContainText('1以上の値を入力してください。');
-  // 予約内容を登録する
-  await reservePage.fillHeadCount('');
-  await reservePage.fillHeadCount('3');
-  await reservePage.clickSubmitButton();
-  await expect(await reservePage.getHeadCountMessage()).toBeVisible();
-  await expect(await reservePage.getHeadCountMessage()).toContainText('2以下の値を入力してください。');
-});
+  test('宿泊予約エラー_人数のフォーマットエラー（シングルプラン）', async ({ page }) => {
+    // 宿泊プランを選択して予約フォームに遷移する
+    const plan = await planPage.navigateToReserve('素泊まり');
+    const reservePage = await ReservePage.initialize(plan);
+    await expect(plan).toHaveURL(/reserve.html/);
+    // 予約内容を登録する
+    await reservePage.fillHeadCount('');
+    await reservePage.fillHeadCount('0');
+    await reservePage.clickSubmitButton();
+    await expect(await reservePage.getHeadCountMessage()).toBeVisible();
+    await expect(await reservePage.getHeadCountMessage()).toContainText('1以上の値を入力してください。');
+    // 予約内容を登録する
+    await reservePage.fillHeadCount('');
+    await reservePage.fillHeadCount('3');
+    await reservePage.clickSubmitButton();
+    await expect(await reservePage.getHeadCountMessage()).toBeVisible();
+    await expect(await reservePage.getHeadCountMessage()).toContainText('2以下の値を入力してください。');
+  });
 
-test('宿泊予約エラー_宿泊日のフォーマットエラー', async ({ page }) => {
-  // 宿泊プランを選択して予約フォームに遷移する
-  const plan = await planPage.navigateToReserve('素泊まり');
-  const reservePage =  await ReservePage.initialize(plan);
-  await expect(plan).toHaveURL(/reserve.html/);
-  // 予約内容を登録する
-  await reservePage.fillDate('');
-  await reservePage.fillDate('2000/01/01');
-  await reservePage.clickSubmitButton();
-  await expect(await reservePage.getDateMessage()).toBeVisible();
-  await expect(await reservePage.getDateMessage()).toContainText('翌日以降の日付を入力してください。');
-  // 予約内容を登録する
-  await reservePage.fillDate('');
-  await reservePage.fillDate('2100/01/01');
-  await reservePage.clickSubmitButton();
-  await expect(await reservePage.getDateMessage()).toBeVisible();
-  await expect(await reservePage.getDateMessage()).toContainText('3ヶ月以内の日付を入力してください。');
+  test('宿泊予約エラー_宿泊日のフォーマットエラー', async ({ page }) => {
+    // 宿泊プランを選択して予約フォームに遷移する
+    const plan = await planPage.navigateToReserve('素泊まり');
+    const reservePage = await ReservePage.initialize(plan);
+    await expect(plan).toHaveURL(/reserve.html/);
+    // 予約内容を登録する
+    await reservePage.fillDate('');
+    await reservePage.fillDate('2000/01/01');
+    await reservePage.clickSubmitButton();
+    await expect(await reservePage.getDateMessage()).toBeVisible();
+    await expect(await reservePage.getDateMessage()).toContainText('翌日以降の日付を入力してください。');
+    // 予約内容を登録する
+    await reservePage.fillDate('');
+    await reservePage.fillDate('2100/01/01');
+    await reservePage.clickSubmitButton();
+    await expect(await reservePage.getDateMessage()).toBeVisible();
+    await expect(await reservePage.getDateMessage()).toContainText('3ヶ月以内の日付を入力してください。');
+  });
 });
